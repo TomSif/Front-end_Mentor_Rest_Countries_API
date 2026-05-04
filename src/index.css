@@ -1,0 +1,94 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Nunito Sans", sans-serif;
+
+  --color-white: #ffffff;
+  --color-black: #000000;
+
+  --color-grey-950: #111517;
+  --color-grey-400: #808080;
+  --color-grey-350: #979797;
+  --color-grey-300: #b2b2b2;
+  --color-grey-250: #c4c4c4;
+  --color-grey-50: #fcfcfc;
+
+  --color-blue-950: #202c36;
+  --color-blue-900: #2b3844;
+}
+
+@layer base {
+  html {
+    font-family: var(--font-sans);
+  }
+}
+
+@utility text-preset-1 {
+  font-size: 2rem;
+  line-height: 1.375;
+  font-weight: 800;
+  letter-spacing: 0;
+}
+
+@utility text-preset-2 {
+  font-size: 1.5rem;
+  line-height: 1.375;
+  font-weight: 800;
+  letter-spacing: 0;
+}
+
+@utility text-preset-3 {
+  font-size: 1.125rem;
+  line-height: 1.45;
+  font-weight: 800;
+  letter-spacing: 0;
+}
+
+@utility text-preset-4-semibold {
+  font-size: 1rem;
+  line-height: 2;
+  font-weight: 600;
+  letter-spacing: 0;
+}
+
+@utility text-preset-4-light {
+  font-size: 1rem;
+  line-height: 2;
+  font-weight: 300;
+  letter-spacing: 0;
+}
+
+@utility text-preset-5 {
+  font-size: 0.875rem;
+  line-height: 1.45;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+
+@utility text-preset-5-light {
+  font-size: 0.875rem;
+  line-height: 2.25;
+  font-weight: 300;
+  letter-spacing: 0;
+}
+
+@utility text-preset-6-semibold {
+  font-size: 0.75rem;
+  line-height: 1.35;
+  font-weight: 600;
+  letter-spacing: 0;
+}
+
+@utility text-preset-6 {
+  font-size: 0.75rem;
+  line-height: 1.35;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+
+@utility text-preset-6-light {
+  font-size: 0.75rem;
+  line-height: 1.35;
+  font-weight: 300;
+  letter-spacing: 0;
+}
