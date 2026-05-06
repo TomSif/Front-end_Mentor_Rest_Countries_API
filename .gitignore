@@ -23,6 +23,8 @@ dist-ssr
 logs
 *.log
 .claude
+.env
+
 
 # Personnal Backlogs and Configs
 rapport.md
