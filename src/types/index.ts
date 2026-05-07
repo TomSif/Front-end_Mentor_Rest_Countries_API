@@ -25,3 +25,5 @@ export type Country = {
   languages: Language[];
   flag: string;
 };
+
+export type Region = "Africa" | "Americas" | "Asia" | "Europe" | "Oceania" | "";
