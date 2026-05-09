@@ -107,9 +107,31 @@
   font-weight: 600;
   letter-spacing: 0;
 }
+
 @utility text-preset-8-light {
   font-size: 0.875rem;
   line-height: 1.6;
   font-weight: 300;
+  letter-spacing: 0;
+}
+
+@utility text-preset-9-semibold {
+  font-size: 0.875rem;
+  line-height: 2.3;
+  font-weight: 600;
+  letter-spacing: 0;
+}
+
+@utility text-preset-9-light {
+  font-size: 0.875rem;
+  line-height: 2.3;
+  font-weight: 300;
+  letter-spacing: 0;
+}
+
+@utility text-preset-10-semibold {
+  font-size: 1rem;
+  line-height: 1.5;
+  font-weight: 600;
   letter-spacing: 0;
 }
