@@ -21,10 +21,10 @@ function Home() {
   }, [countries, filter, searchInput]);
 
   return (
-    <main className="bg-grey-50 px-4 py-6 xl:px-21 dark:bg-blue-950">
-      <fieldset className="text-grey-950 mt-5 flex w-full flex-col gap-2 md:flex-row md:justify-between dark:text-white">
+    <main className="bg-grey-50 px-4 py-6 md:px-10 md:py-12 xl:px-21 dark:bg-blue-950">
+      <fieldset className="text-grey-950 md: mt-5 flex w-full flex-col justify-between gap-10 md:flex-row md:gap-2 dark:text-white">
         <legend className="sr-only">Filtres</legend>
-        <div className="relative w-full">
+        <div className="relative w-full max-w-110 min-w-40 flex-1">
           <span className="absolute top-1/2 left-8 -translate-y-1/2">
             <img src="/images/Shape.png" alt="" />
           </span>
@@ -36,12 +36,12 @@ function Home() {
             placeholder="Search for a country"
             className="w-full bg-white py-4 pr-4 pl-18 shadow-md dark:bg-blue-900"
           />
-        </div>{" "}
+        </div>
         <label className="sr-only" htmlFor="regions">
           Filter by Region
         </label>
         <select
-          className="bg-white px-8 py-4 pr-11 shadow-md dark:bg-blue-900"
+          className="w-full max-w-50 bg-white px-8 py-4 pr-11 shadow-md dark:bg-blue-900"
           value={filter}
           onChange={(e) => setFilter(e.target.value as Region)}
           id="regions"
@@ -54,8 +54,8 @@ function Home() {
           ))}
         </select>
       </fieldset>
-      <section className="mt-11">
-        <ul className="grid w-full grid-cols-1 justify-items-center gap-10 gap-x-18 gap-y-18 px-10 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:px-0">
+      <section className="mt-8 md:mt-12">
+        <ul className="grid w-full grid-cols-1 justify-items-center gap-10 gap-x-18 gap-y-18 px-10 md:grid-cols-2 md:justify-between lg:grid-cols-3 xl:grid-cols-4 xl:px-0">
           {filteredCountries.map((country) => (
             <li key={country.alpha3Code}>
               <CountryCard

@@ -3,7 +3,7 @@ import useTheme from "../hook/useTheme";
 function Header() {
   const { isDark, toggleTheme } = useTheme();
   return (
-    <header className="text-grey-950 border-b-grey-350 flex w-full flex-row justify-between border-2 border-transparent bg-white px-4 py-7.5 dark:bg-blue-900 dark:text-white">
+    <header className="text-grey-950 flex w-full flex-row justify-between bg-white px-4 py-7.5 drop-shadow-sm md:px-10 xl:px-21 dark:bg-blue-900 dark:text-white">
       <h1 className="text-preset-7">Where in the world?</h1>
       <button
         onClick={toggleTheme}
