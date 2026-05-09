@@ -1,4 +1,5 @@
 import { useState, useMemo } from "react";
+import { Link } from "react-router";
 import { Region } from "../types";
 import useCountries from "../hook/useCountries";
 import CountryCard from "./CountryCard";
@@ -57,15 +58,20 @@ function Home() {
       <section className="mt-8 md:mt-12">
         <ul className="grid w-full grid-cols-1 justify-items-center gap-10 gap-x-18 gap-y-18 px-10 md:grid-cols-2 md:justify-between lg:grid-cols-3 xl:grid-cols-4 xl:px-0">
           {filteredCountries.map((country) => (
-            <li key={country.alpha3Code}>
-              <CountryCard
-                name={country.name}
-                capital={country.capital}
-                region={country.region}
-                population={country.population}
-                flag={country.flag}
-              />
-            </li>
+            <Link
+              key={country.alpha3Code}
+              to={`/country/${country.alpha3Code}`}
+            >
+              <li>
+                <CountryCard
+                  name={country.name}
+                  capital={country.capital}
+                  region={country.region}
+                  population={country.population}
+                  flag={country.flag}
+                />
+              </li>
+            </Link>
           ))}
         </ul>
       </section>
