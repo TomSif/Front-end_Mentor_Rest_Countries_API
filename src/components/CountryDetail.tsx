@@ -26,7 +26,7 @@ function CountryDetail() {
       <button
         onClick={() => navigate(-1)}
         type="button"
-        className="text-preset-5-light text-grey-950 flex h-8 w-full max-w-26 items-center rounded-sm bg-white text-center drop-shadow-sm dark:bg-blue-900"
+        className="btn text-preset-5-light text-grey-950 flex h-8 w-full max-w-26 items-center rounded-sm bg-white text-center drop-shadow-sm dark:bg-blue-900"
       >
         <span className="mx-auto dark:text-white">&larr; Back</span>
       </button>
