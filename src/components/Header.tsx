@@ -1,10 +1,13 @@
+import { Link } from "react-router";
 import useTheme from "../hook/useTheme";
 
 function Header() {
   const { isDark, toggleTheme } = useTheme();
   return (
     <header className="text-grey-950 flex w-full flex-row justify-between bg-white px-4 py-7.5 drop-shadow-sm md:px-10 xl:px-21 dark:bg-blue-900 dark:text-white">
-      <h1 className="text-preset-7">Where in the world?</h1>
+      <Link to={`/`}>
+        <h1 className="text-preset-7">Where in the world?</h1>
+      </Link>
       <button
         onClick={toggleTheme}
         type="button"
