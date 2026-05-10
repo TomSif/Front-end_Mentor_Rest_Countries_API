@@ -1,5 +1,5 @@
 import { useParams, useNavigate, Link } from "react-router";
-import useCountries from "../hook/useCountries";
+import useCountries from "../hooks/useCountries";
 
 function CountryDetail() {
   const { alpha3Code } = useParams<{ alpha3Code: string }>();
@@ -105,8 +105,12 @@ function CountryDetail() {
                 </dt>
                 <dd className="text-preset-9-light flex-2">
                   <ul className="flex flex-wrap gap-4">
-                    {findCountry.borders
-                      ? findCountry?.borders.map((b) => (
+                    {findCountry.borders ? (
+                      findCountry?.borders
+                        .filter((b) => {
+                          return !!getBorderName(b);
+                        })
+                        .map((b) => (
                           <li key={b}>
                             <Link
                               className="btn text-preset-6-light flex h-auto items-center justify-center bg-white px-4 py-1.5 text-center drop-shadow-sm dark:bg-blue-900"
@@ -116,7 +120,9 @@ function CountryDetail() {
                             </Link>
                           </li>
                         ))
-                      : ""}
+                    ) : (
+                      <></>
+                    )}
                   </ul>
                 </dd>
               </div>
