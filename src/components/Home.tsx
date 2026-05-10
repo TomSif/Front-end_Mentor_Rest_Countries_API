@@ -1,7 +1,7 @@
 import { useState, useMemo } from "react";
 import { Link } from "react-router";
 import { Region } from "../types";
-import useCountries from "../hook/useCountries";
+import useCountries from "../hooks/useCountries";
 import CountryCard from "./CountryCard";
 
 const REGIONS: Region[] = ["Africa", "Americas", "Asia", "Europe", "Oceania"];
@@ -29,6 +29,9 @@ function Home() {
           <span className="absolute top-1/2 left-8 -translate-y-1/2">
             <img src="/images/Shape.png" alt="" />
           </span>
+          <label className="sr-only" htmlFor="search">
+            Search for a country
+          </label>
           <input
             id="search"
             type="text"
