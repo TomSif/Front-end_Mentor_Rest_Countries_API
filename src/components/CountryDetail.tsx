@@ -1,4 +1,4 @@
-import { useParams, useNavigate } from "react-router";
+import { useParams, useNavigate, Link } from "react-router";
 import useCountries from "../hook/useCountries";
 
 function CountryDetail() {
@@ -22,16 +22,16 @@ function CountryDetail() {
   }
 
   return (
-    <main className="bg-grey-50 min-h-dvh px-7 py-10 md:px-25">
+    <main className="bg-grey-50 min-h-dvh px-7 py-10 md:px-25 dark:bg-blue-950 dark:text-white">
       <button
         onClick={() => navigate(-1)}
         type="button"
-        className="text-preset-5-light text-grey-950 flex h-8 w-full max-w-26 items-center rounded-sm bg-white text-center drop-shadow-sm"
+        className="text-preset-5-light text-grey-950 flex h-8 w-full max-w-26 items-center rounded-sm bg-white text-center drop-shadow-sm dark:bg-blue-900"
       >
-        <span className="mx-auto">&larr; Back</span>
+        <span className="mx-auto dark:text-white">&larr; Back</span>
       </button>
 
-      <article className="mt-12 flex flex-col gap-12 xl:flex-row xl:items-center">
+      <article className="mt-12 flex flex-col gap-12 xl:flex-row xl:items-baseline-last">
         <section className="w-full max-w-140">
           <img
             className="aspect-4/3 rounded-lg object-cover"
@@ -41,7 +41,7 @@ function CountryDetail() {
         </section>
 
         <section>
-          <h2 className="text-preset-1 text-grey-950 mb-4 md:mb-6">
+          <h2 className="text-preset-1 text-grey-950 mb-4 md:mb-6 dark:text-white">
             {findCountry.name}
           </h2>
 
@@ -99,17 +99,21 @@ function CountryDetail() {
             </div>
 
             <div>
-              <div className="flex flex-col gap-4 md:flex-row">
-                <dt className="text-preset-10-semibold">Border Countries:</dt>
-                <dd className="text-preset-9-light">
-                  <ul className="flex gap-4">
+              <div className="flex flex-col items-baseline gap-4 md:flex-row">
+                <dt className="text-preset-10-semibold min-w-8 flex-1">
+                  Border Countries:
+                </dt>
+                <dd className="text-preset-9-light flex-2">
+                  <ul className="flex flex-wrap gap-4">
                     {findCountry.borders
-                      ? findCountry?.borders.map((b, index) => (
-                          <li
-                            className="text-preset-6-light flex h-7 w-auto items-center justify-center bg-white px-4 text-center drop-shadow-sm"
-                            key={index}
-                          >
-                            {getBorderName(b)}
+                      ? findCountry?.borders.map((b) => (
+                          <li key={b}>
+                            <Link
+                              className="text-preset-6-light flex h-auto items-center justify-center bg-white px-4 py-1.5 text-center drop-shadow-sm dark:bg-blue-900"
+                              to={`/country/${b}`}
+                            >
+                              {getBorderName(b)}
+                            </Link>
                           </li>
                         ))
                       : ""}
