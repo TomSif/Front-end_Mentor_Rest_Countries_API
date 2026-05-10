@@ -6,7 +6,7 @@
 [![Tailwind](https://img.shields.io/badge/tailwindcss_v4-0F172A?&logo=tailwindcss&logocolor=white)](https://tailwindcss.com/)
 [![TypeScript](https://img.shields.io/badge/typescript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 
-![Design preview for the REST Countries API challenge](/images/screenshot-detail.png)
+![Design preview for the REST Countries API challenge](./public/images/screenshot-detail.png)
 
 ### 🌐 Live Demo:
 
@@ -46,7 +46,7 @@ Users should be able to:
 
 ### Screenshot
 
-![](/images/screensot.png)
+![](./public/images/screensot.png)
 
 ### Links
 
