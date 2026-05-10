@@ -1,113 +1,186 @@
-# Frontend Mentor - REST Countries API with color theme switcher
+# Frontend Mentor - REST Countries API with Color Theme Switcher 🌍
 
-![Design preview for the REST Countries API with color theme switcher coding challenge](preview.jpg)
+[![React](https://img.shields.io/badge/react_19-20232a?style=for-the-badge&logo=react&logocolor=61dafb)](https://reactjs.org/)
+[![React Router](https://img.shields.io/badge/react_router_v7-CA4245?style=for-the-badge&logo=react-router&logoColor=white)](https://reactrouter.com/)
+[![Vite](https://img.shields.io/badge/vite-646cff?style=for-the-badge&logo=vite&logocolor=white)](https://vitejs.dev/)
+[![Tailwind](https://img.shields.io/badge/tailwindcss_v4-0F172A?&logo=tailwindcss&logocolor=white)](https://tailwindcss.com/)
+[![TypeScript](https://img.shields.io/badge/typescript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 
-## Welcome! 👋
+![Design preview for the REST Countries API challenge](/images/screenshot-detail.png)
 
-Thanks for checking out this front-end coding challenge.
+### 🌐 Live Demo:
 
-[Frontend Mentor](https://www.frontendmentor.io) challenges help you improve your coding skills by building realistic projects.
+**[View live site →](https://front-end-mentor-rest-countries-api-omega.vercel.app/)**
 
-**To do this challenge, you need a good understanding of HTML, CSS, and JavaScript.**
+Deployed on Vercel with HTTPS and performance optimizations.
 
-## The challenge
+---
 
-Your challenge is to integrate with the [REST Countries API](https://restcountries.com) to pull country data and display it like in the designs.
+This is a solution to the [REST Countries API with color theme switcher challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/rest-countries-api-with-color-theme-switcher-5cacc469fec04111f7b848ca). Frontend Mentor challenges help you improve your coding skills by building realistic projects.
 
-You can use any JavaScript framework/library on the front-end such as [React](https://reactjs.org) or [Vue](https://vuejs.org). You also have complete control over which packages you use to do things like make HTTP requests or style your project.
+## Table of contents
 
-Your users should be able to:
+- [Overview](#overview)
+  - [The challenge](#the-challenge)
+  - [Screenshot](#screenshot)
+  - [Links](#links)
+- [My process](#my-process)
+  - [Built with](#built-with)
+  - [What I learned](#what-i-learned)
+  - [Continued development](#continued-development)
+- [Author](#author)
+- [Acknowledgments](#acknowledgments)
+
+## Overview
+
+### The challenge
+
+Users should be able to:
 
 - See all countries from the API on the homepage
 - Search for a country using an `input` field
-- Filter countries by region
-- Click on a country to see more detailed information on a separate page
-- Click through to the border countries on the detail page
-- Toggle the color scheme between light and dark mode *(optional)*
+- Filter countries by region using a `select` dropdown
+- Click on a country card to see more detailed information on a separate page
+- Click through to border countries on the detail page
+- Toggle the color scheme between light and dark mode
 
-### Want some support on the challenge? 
+### Screenshot
 
-[Join our community](https://www.frontendmentor.io/community) and ask questions in the **#help** channel.
+![](/images/screensot.png)
 
-**⚠️ NOTE ⚠️: Sometimes the REST Countries API can go down. We've added a `data.json` file with all the country data if you prefer to use that instead. However, please be aware that the data in the JSON file might not be up-to-date.**
+### Links
 
-## Where to find everything
+- Solution URL: [GitHub Repository](https://github.com/TomSif/Front-end_Mentor_Rest_Countries_API)
+- Live Site URL: [Vercel Deployment](https://front-end-mentor-rest-countries-api-omega.vercel.app/)
 
-Your task is to build out the project to the designs inside the `/design` folder. 
+## My process
 
-In this challenge, you will find mobile and desktop designs in light and dark mode color schemes for both pages.
+### Built with
 
-The designs are in JPG static format. Using JPGs will mean that you'll need to use your best judgment for styles such as `font-size`, `padding` and `margin`. 
+- Semantic HTML5 markup (`dl`, `dt`, `dd` for structured country data)
+- Mobile-first workflow
+- [React 19](https://react.dev/) - JS library
+- [React Router v7](https://reactrouter.com/) - Client-side routing
+- [TypeScript](https://www.typescriptlang.org/)
+- [Vite](https://vitejs.dev/) - Build tool
+- [Tailwind CSS v4](https://tailwindcss.com/) - Utility-first CSS (`@tailwindcss/vite` plugin, `@theme` variables, `@utility` presets, `@variant dark` class-based)
+- [clsx](https://github.com/lukeed/clsx) + [tailwind-merge](https://github.com/dcastil/tailwind-merge) — `cn()` utility for conditional classNames
 
-If you would like the Figma design file to inspect the design in more detail, you can [subscribe as a PRO member](https://www.frontendmentor.io/pro).
+### What I learned
 
-There are no assets for this challenge, as the country flags will be pulled from the [REST Countries API](https://restcountries.com) and you can use an icon font library for the icons.
+#### Context API architecture — two separate contexts
 
-There is also a `style-guide.md` file containing the information you'll need, such as color palette and fonts.
+The architectural foundation of this project is two independent React contexts: `CountriesContext` (data) and `ThemeContext` (UI state). Each context is consumed through a dedicated custom hook with an `undefined` guard, so any consumer outside its provider fails loudly instead of silently:
 
-## Using AI coding assistants
+```ts
+// Consumed safely from any component
+const { countries, loading, error } = useCountries();
+const { isDark, toggleTheme } = useTheme();
+```
 
-We've included two files to help you if you're using AI coding assistants (like Claude, GitHub Copilot, Cursor, etc.) while working on this challenge:
+A key insight was understanding _what belongs in a context_: the setter (`setCountries`) stays internal to the Provider; only the value consumers actually need is exposed. This distinction — between the mechanism and the interface — required deliberate work before it became clear.
 
-- `AGENTS.md` - Contains detailed instructions for AI assistants on how to help you with this challenge. It's tailored to this challenge's difficulty level, so the AI will provide guidance appropriate to your learning stage—offering more support for beginner challenges and encouraging more independence on advanced ones.
-- `CLAUDE.md` - A pointer file that directs Claude-based tools to the AGENTS.md instructions.
+#### `useEffect` + async data fetching with try/catch/finally
 
-**How to use them:** You don't need to do anything! These files are automatically detected by most AI coding tools. The AI will read them and adjust its behavior to be a better learning partner—guiding you toward solutions rather than just giving you the answers.
+Fetching country data inside a `useEffect` required putting together several pieces that had never been used together before: the async wrapper pattern, loading/error state, type casting, and field filtering in the URL to reduce payload size:
 
-**Note:** These files are designed to help you *learn*, not to do the work for you. The AI is instructed to ask questions, give hints, and explain concepts rather than writing complete solutions.
+```ts
+useEffect(() => {
+  const fetchCountries = async () => {
+    try {
+      setLoading(true);
+      const response = await fetch(`${BASE_URL}?fields=name,alpha3Code,...`);
+      const data = (await response.json()) as Country[];
+      setCountries(data);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Unknown error");
+    } finally {
+      setLoading(false);
+    }
+  };
+  fetchCountries();
+}, []);
+```
 
-## Building your project
+A concrete bug was diagnosed and corrected during development: calling `setCountries` directly in the component body (instead of inside `useEffect`) caused an infinite re-render loop. The correction made the distinction between _initialising_ state and _modifying_ it tangible rather than theoretical.
 
-Feel free to use any workflow that you feel comfortable with. Below is a suggested process, but do not feel like you need to follow these steps:
+#### Dark mode — class-based Tailwind v4 with `@variant`
 
-1. Initialize your project as a public repository on [GitHub](https://github.com/). Creating a repo will make it easier to share your code with the community if you need help. If you're not sure how to do this, [have a read-through of this Try Git resource](https://try.github.io/).
-2. Configure your repository to publish your code to a web address. This will also be useful if you need some help during a challenge as you can share the URL for your project with your repo URL. There are a number of ways to do this, and we provide some recommendations below.
-3. Look through the designs to start planning out how you'll tackle the project. This step is crucial to help you think ahead for CSS classes to create reusable styles.
-4. Before adding any styles, structure your content with HTML. Writing your HTML first can help focus your attention on creating well-structured content.
-5. Write out the base styles for your project, including general content styles, such as `font-family` and `font-size`.
-6. Start adding styles to the top of the page and work down. Only move on to the next section once you're happy you've completed the area you're working on.
+Tailwind v4 handles class-based dark mode differently from v3. The setup requires two coordinated pieces: a `@variant` declaration in CSS and a `useEffect` in `ThemeProvider` that toggles the class on `document.documentElement`:
 
-## Deploying your project
+```css
+/* index.css */
+@variant dark (&:where(.dark, .dark *));
+```
 
-As mentioned above, there are many ways to host your project for free. Our recommended hosts are:
+```ts
+// ThemeProvider
+useEffect(() => {
+  document.documentElement.classList.toggle("dark", isDark);
+}, [isDark]);
+```
 
-- [GitHub Pages](https://pages.github.com/)
-- [Vercel](https://vercel.com/)
-- [Netlify](https://www.netlify.com/)
+This means no component needs to import or call anything to get dark mode styling — `dark:` Tailwind variants just work everywhere as long as `.dark` is on the root element.
 
-You can host your site using one of these solutions or any of our other trusted providers. [Read more about our recommended and trusted hosts](https://www.frontendmentor.io/guides/hosting-your-solution).
+#### `useMemo` for combined search and region filter
 
-## Create a custom `README.md`
+Filtering 250 countries efficiently required combining two independent conditions in a single `useMemo`. The key pattern is short-circuiting each condition when its input is empty, so the full list is shown when neither filter is active:
 
-We strongly recommend overwriting this `README.md` with a custom one. We've provided a template inside the [`README-template.md`](./README-template.md) file in this starter code.
+```ts
+const filteredCountries = useMemo(() => {
+  return countries.filter((country) => {
+    const matchesRegion = filter === "" || country.region === filter;
+    const matchesSearch =
+      searchInput === "" ||
+      country.name.toLowerCase().includes(searchInput.toLowerCase());
+    return matchesRegion && matchesSearch;
+  });
+}, [countries, filter, searchInput]);
+```
 
-The template provides a guide for what to add. A custom `README` will help you explain your project and reflect on your learnings. Please feel free to edit our template as much as you like.
+The `(x === "" || condition)` pattern required several iterations before the logic became clear: the empty-string check is not comparing against an empty value — it's a short-circuit that bypasses the condition entirely when no filter is selected.
 
-Once you've added your information to the template, delete this file and rename the `README-template.md` file to `README.md`. That will make it show up as your repository's README file.
+#### React Router — `Link` vs `NavLink` vs `navigate()`
 
-## Submitting your solution
+This project required choosing deliberately between three navigation mechanisms on different occasions:
 
-Submit your solution on the platform for the rest of the community to see. Follow our ["Complete guide to submitting solutions"](https://www.frontendmentor.io/guides/how-to-submit-solutions) for tips on how to do this.
+- **`Link`** — for cards and border buttons: URL known at render time, no active state needed
+- **`navigate(-1)`** — for the Back button: destination is history-dependent, known only at runtime
+- **`NavLink`** — deliberately _not_ used on cards, as active-link styling only makes sense in primary navigation
 
-Remember, if you're looking for feedback on your solution, be sure to ask questions when submitting it. The more specific and detailed you are with your questions, the higher the chance you'll get valuable feedback from the community.
+A structural bug was also identified and corrected: wrapping a `<li>` inside an `<a>` (i.e. `Link > li`) is invalid HTML. The correct pattern is `li > Link`, with the `key` on the `<li>` (the outermost element in the list):
 
-## Sharing your solution
+```tsx
+// ✅ Correct
+<ul>
+  {countries.map((country) => (
+    <li key={country.alpha3Code}>
+      <Link to={`/country/${country.alpha3Code}`}>
+        <CountryCard country={country} />
+      </Link>
+    </li>
+  ))}
+</ul>
+```
 
-There are multiple places you can share your solution:
+### Continued development
 
-1. Share your solution page in the **#finished-projects** channel of the [community](https://www.frontendmentor.io/community). 
-2. Share on [X (formerly Twitter)](https://x.com/frontendmentor) and mention **@frontendmentor**, including the repo and live URLs in your post. We'd love to take a look at what you've built and help share it around.
-3. Share your solution on [LinkedIn](https://www.linkedin.com/company/frontend-mentor/).
-4. Blog about your experience building your project. Writing about your workflow, technical choices, and talking through your code is a brilliant way to reinforce what you've learned. Great platforms to write on are [dev.to](https://dev.to/), [Hashnode](https://hashnode.com/), and [CodeNewbie](https://community.codenewbie.org/).
+- **`find()?.property` not yet instinctive** — the reflex of asking "what type does `find()` return?" before chaining a property still requires deliberate effort. One more project with nested data structures should anchor it.
+- **Combined boolean logic in `.filter()`** — the `(x === "" || condition) && (y === "" || condition)` pattern works but needed multiple iterations to click. The distinction between "short-circuit an empty filter" and "compare against an empty string" needs more practice to become automatic.
+- **TypeScript: type alias union vs type alias object** — writing `type Region = "Africa" | "Europe" | ...` vs `type Region = { region?: ... }` still requires conscious verification. The distinction between a value type and a shape type isn't yet a reflex.
+- **HTML validity in React lists** — the `Link > li` invalid pattern was reproduced twice across two components before being caught. The rule "the outermost element of a list item is the `<li>`" needs to become automatic.
 
-We provide templates to help you share your solution once you've submitted it on the platform. Please do edit them and include specific questions when you're looking for feedback. 
+## Author
 
-The more specific you are with your questions the more likely it is that another member of the community will give you feedback.
+- Frontend Mentor - [@TomSif](https://www.frontendmentor.io/profile/TomSif)
+- GitHub - [@TomSif](https://github.com/TomSif)
 
-## Got feedback for us?
+## Acknowledgments
 
-We love receiving feedback! We're always looking to improve our challenges and our platform. So if you have anything you'd like to mention, please email hi[at]frontendmentor[dot]io.
+This project was built with AI-assisted mentoring (Claude). The approach: I code by hand, Claude acts as a Socratic mentor — asking questions, explaining concepts, reviewing my reasoning. Architectural decisions (how to structure contexts, when to use `useMemo`, how to handle routing) stayed mine.
 
-This challenge is completely free. Please share it with anyone who will find it useful for practice.
+Specific AI contributions are documented transparently in my [progression log](./progression.md):
 
-**Have fun building!** 🚀
+- **Written by Claude:** project scaffold (`chore/setup` commits), design tokens in `index.css`, Tailwind v4 `@variant dark` syntax when blocked
+- **My initiative:** autonomous extraction of `Currency` and `Language` sub-types, identification of the `setCountries`-in-body infinite loop, semantic key (`alpha3Code` over `index`) on border buttons, `navigate(-1)` justification against hardcoded Home link
+- **Collaborative:** building the dual-context architecture after guided decomposition, working through the combined `useMemo` filter logic, debugging `Link > li` HTML validity, applying O7 pseudo-code protocol on the three main data flows
