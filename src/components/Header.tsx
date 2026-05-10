@@ -1,5 +1,5 @@
 import { Link } from "react-router";
-import useTheme from "../hook/useTheme";
+import useTheme from "../hooks/useTheme";
 
 function Header() {
   const { isDark, toggleTheme } = useTheme();
