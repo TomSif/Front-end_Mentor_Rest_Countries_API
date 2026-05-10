@@ -46,7 +46,7 @@ Users should be able to:
 
 ### Screenshot
 
-![](./public/images/screensot.png)
+![](./public/images/screenshot.png)
 
 ### Links
 
