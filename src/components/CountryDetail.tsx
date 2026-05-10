@@ -109,7 +109,7 @@ function CountryDetail() {
                       ? findCountry?.borders.map((b) => (
                           <li key={b}>
                             <Link
-                              className="text-preset-6-light flex h-auto items-center justify-center bg-white px-4 py-1.5 text-center drop-shadow-sm dark:bg-blue-900"
+                              className="btn text-preset-6-light flex h-auto items-center justify-center bg-white px-4 py-1.5 text-center drop-shadow-sm dark:bg-blue-900"
                               to={`/country/${b}`}
                             >
                               {getBorderName(b)}

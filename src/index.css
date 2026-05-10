@@ -142,3 +142,29 @@
   font-weight: 700;
   letter-spacing: 0;
 }
+
+/* Custom css */
+.card,
+.btn {
+  display: block;
+  transition:
+    transform 250ms ease-out,
+    box-shadow 250ms ease-out;
+  transform-origin: center;
+  will-change: transform;
+}
+
+.card:hover,
+.card:focus,
+.card:focus-visible,
+.card:active {
+  transform: scale(1.02);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+}
+
+.btn:hover,
+.btn:focus,
+.btn:focus-visible,
+.btn:active {
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+}

@@ -59,7 +59,7 @@ function Home() {
         <ul className="grid w-full grid-cols-1 justify-items-center gap-10 gap-x-18 gap-y-18 px-10 md:grid-cols-2 md:justify-between lg:grid-cols-3 xl:grid-cols-4 xl:px-0">
           {filteredCountries.map((country) => (
             <li key={country.alpha3Code}>
-              <Link to={`/country/${country.alpha3Code}`}>
+              <Link className="card" to={`/country/${country.alpha3Code}`}>
                 <CountryCard
                   name={country.name}
                   capital={country.capital}
