@@ -135,3 +135,10 @@
   font-weight: 600;
   letter-spacing: 0;
 }
+
+@utility text-preset-11-bold {
+  font-size: clamp(2rem, 5vw, 3rem);
+  line-height: 1.8;
+  font-weight: 700;
+  letter-spacing: 0;
+}
