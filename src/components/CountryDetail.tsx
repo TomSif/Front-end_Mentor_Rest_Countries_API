@@ -22,7 +22,7 @@ function CountryDetail() {
   }
 
   return (
-    <main className="bg-grey-50 min-h-dvh px-7 py-10 md:px-25 dark:bg-blue-950 dark:text-white">
+    <main className="px-7 py-10 md:px-25 dark:text-white">
       <button
         onClick={() => navigate(-1)}
         type="button"
@@ -31,7 +31,7 @@ function CountryDetail() {
         <span className="mx-auto dark:text-white">&larr; Back</span>
       </button>
 
-      <article className="mt-12 flex flex-col gap-12 xl:flex-row xl:items-baseline-last">
+      <article className="mt-12 flex flex-col gap-12 xl:flex-row xl:items-start">
         <section className="w-full max-w-140">
           <img
             className="aspect-4/3 rounded-lg object-cover"

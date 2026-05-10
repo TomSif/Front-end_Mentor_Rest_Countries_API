@@ -6,14 +6,14 @@ import Fallback from "./components/Fallback";
 
 function App() {
   return (
-    <>
+    <div className="bg-grey-50 min-h-dvh dark:bg-blue-950">
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/country/:alpha3Code" element={<CountryDetail />} />
         <Route path="*" element={<Fallback />} />
       </Routes>
-    </>
+    </div>
   );
 }
 
