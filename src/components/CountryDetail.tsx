@@ -15,18 +15,15 @@ function CountryDetail() {
     const fetchData = async () => {
       try {
         setLoading(true);
-
         const [countryRes, mapRes] = await Promise.all([
           fetch(
             `https://restcountries.com/v3.1/alpha/${alpha3Code}?fields=name,tld,cca3,capital,subregion,region,population,borders,languages,currencies,flags`,
           ),
           fetch("https://restcountries.com/v3.1/all?fields=cca3,name"),
         ]);
-
         const countryData = await countryRes.json();
         const mapData = await mapRes.json();
-
-        setCountry(countryData[0]);
+        setCountry(countryData);
         setCountriesMap(mapData);
       } catch (err) {
         setError("Erreur lors du fetch");
@@ -96,7 +93,9 @@ function CountryDetail() {
                 </div>
                 <div className="flex gap-1">
                   <dt className="text-preset-9-semibold">Capital:</dt>
-                  <dd className="text-preset-9-light">{country.capital}</dd>
+                  <dd className="text-preset-9-light">
+                    {country.capital.join(", ")}
+                  </dd>
                 </div>
               </div>
 
