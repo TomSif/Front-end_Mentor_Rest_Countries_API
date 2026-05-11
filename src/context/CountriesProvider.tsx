@@ -37,12 +37,8 @@ export function CountriesProvider({ children }: { children: React.ReactNode }) {
     fetchCountries();
   }, []);
 
-  if (loading) return <p>Chargement...</p>;
-
-  if (error) return <p>{error}</p>;
-
   return (
-    <CountriesContext.Provider value={{ countries }}>
+    <CountriesContext.Provider value={{ countries, loading, error }}>
       {children}
     </CountriesContext.Provider>
   );

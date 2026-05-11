@@ -9,7 +9,7 @@ const REGIONS: Region[] = ["Africa", "Americas", "Asia", "Europe", "Oceania"];
 function Home() {
   const [searchInput, setSearchInput] = useState<string>("");
   const [filter, setFilter] = useState<Region>("");
-  const { countries } = useCountries();
+  const { countries, loading, error } = useCountries();
 
   const filteredCountries = useMemo(() => {
     return countries.filter((country) => {
@@ -20,6 +20,10 @@ function Home() {
       );
     });
   }, [countries, filter, searchInput]);
+
+  if (loading) return <p>Chargement...</p>;
+
+  if (error) return <p>{error}</p>;
 
   return (
     <main className="bg-grey-50 px-4 py-6 md:px-10 md:py-12 xl:px-21 dark:bg-blue-950">
