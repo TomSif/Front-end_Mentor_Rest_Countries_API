@@ -1,6 +1,6 @@
 interface CountryCardProps {
   name: string;
-  capital?: string;
+  capital?: string[];
   region: string;
   population: number;
   flag: string;

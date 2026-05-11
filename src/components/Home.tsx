@@ -16,7 +16,7 @@ function Home() {
       return (
         (filter === "" || country.region === filter) &&
         (searchInput === "" ||
-          country.name.toLowerCase().includes(searchInput.toLowerCase()))
+          country.name.common.toLowerCase().includes(searchInput.toLowerCase()))
       );
     });
   }, [countries, filter, searchInput]);
@@ -61,14 +61,14 @@ function Home() {
       <section className="mt-8 md:mt-12">
         <ul className="grid w-full grid-cols-1 justify-items-center gap-10 gap-x-18 gap-y-18 px-10 md:grid-cols-2 md:justify-between lg:grid-cols-3 xl:grid-cols-4 xl:px-0">
           {filteredCountries.map((country) => (
-            <li key={country.alpha3Code}>
-              <Link className="card" to={`/country/${country.alpha3Code}`}>
+            <li key={country.cca3}>
+              <Link className="card" to={`/country/${country.cca3}`}>
                 <CountryCard
-                  name={country.name}
+                  name={country.name.common}
                   capital={country.capital}
                   region={country.region}
                   population={country.population}
-                  flag={country.flag}
+                  flag={country.flags.png}
                 />
               </Link>
             </li>
