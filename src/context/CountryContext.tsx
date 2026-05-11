@@ -1,8 +1,8 @@
 import { createContext } from "react";
-import type { Country } from "../types";
+import type { CountrySummary } from "../types";
 
 export interface CountryContextType {
-  countries: Country[];
+  countries: CountrySummary[];
 }
 
 export const CountriesContext = createContext<CountryContextType | undefined>(
