@@ -23,7 +23,7 @@ function Home() {
 
   return (
     <main className="bg-grey-50 px-4 py-6 md:px-10 md:py-12 xl:px-21 dark:bg-blue-950">
-      <fieldset className="text-grey-950 md: mt-5 flex w-full flex-col justify-between gap-10 md:flex-row md:gap-2 dark:text-white">
+      <fieldset className="text-grey-950 flex w-full flex-col justify-between gap-10 md:mt-5 md:flex-row md:gap-2 dark:text-white">
         <legend className="sr-only">Filtres</legend>
         <div className="relative w-full max-w-110 min-w-40 flex-1">
           <span className="absolute top-1/2 left-8 -translate-y-1/2">
