@@ -1,29 +1,50 @@
-type Currency = {
-  code: string;
-  name: string;
-  symbol: string;
-};
-
-type Language = {
-  iso639_1: string;
-  iso639_2: string;
-  name: string;
-  nativeName: string;
-};
-
 export type Country = {
-  name: string;
-  topLevelDomain: string[];
-  alpha3Code: string;
-  capital: string;
+  name: {
+    common: string;
+    official: string;
+    nativeName: Record<
+      string,
+      {
+        common: string;
+        official: string;
+      }
+    >;
+  };
+  tld: string[];
+  cca3: string;
+  capital: string[];
   subregion: string;
   region: string;
   population: number;
   borders?: string[];
-  nativeName: string;
-  currencies: Currency[];
-  languages: Language[];
-  flag: string;
+  languages: Record<string, string>;
+  currencies: Record<
+    string,
+    {
+      name: string;
+      symbol: string;
+    }
+  >;
+  flags: {
+    png: string;
+    svg: string;
+  };
+};
+
+export type CountrySummary = {
+  name: {
+    common: string;
+    official: string;
+  };
+  flags: {
+    png: string;
+    svg: string;
+  };
+  cca3: string;
+  capital: string[];
+  region: string;
+  population: number;
+  borders?: string[];
 };
 
 export type Region = "Africa" | "Americas" | "Asia" | "Europe" | "Oceania" | "";
