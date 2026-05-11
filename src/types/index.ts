@@ -47,4 +47,9 @@ export type CountrySummary = {
   borders?: string[];
 };
 
+export type CountryMapEntry = {
+  cca3: string;
+  name: { common: string };
+};
+
 export type Region = "Africa" | "Americas" | "Asia" | "Europe" | "Oceania" | "";

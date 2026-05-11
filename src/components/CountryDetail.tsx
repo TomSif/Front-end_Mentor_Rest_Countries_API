@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate, Link } from "react-router";
-import type { Country } from "../types/index.ts";
+import type { Country, CountryMapEntry } from "../types/index.ts";
 
 function CountryDetail() {
   const [country, setCountry] = useState<Country | null>(null);
-  const [countriesMap, setCountriesMap] = useState<Country[]>([]);
+  const [countriesMap, setCountriesMap] = useState<CountryMapEntry[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const { alpha3Code } = useParams<{ alpha3Code: string }>();
@@ -26,7 +26,7 @@ function CountryDetail() {
         const countryData = await countryRes.json();
         const mapData = await mapRes.json();
 
-        setCountry(countryData);
+        setCountry(countryData[0]);
         setCountriesMap(mapData);
       } catch (err) {
         setError("Erreur lors du fetch");
